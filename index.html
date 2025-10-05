@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop on Reliable Agentic AI: From Hallucination to Trustworthy Autonomy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --light-gray: #e2e8f0;
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            color: var(--secondary);
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(var(--primary) 2px, transparent 3px);
+            background-size: 30px 30px;
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .date-venue {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .date-venue div {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+
+        .topics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .topic-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .topic-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+
+        /* Speakers */
+        .speakers {
+            background-color: #f1f5f9;
+        }
+
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .speaker-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .speaker-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .speaker-img {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .speaker-info {
+            padding: 1.5rem;
+        }
+
+        .speaker-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .speaker-info p {
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .speaker-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .speaker-links a {
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .speaker-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Schedule */
+        .schedule-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid var(--light-gray);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .schedule-items {
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .schedule-item {
+            display: flex;
+            padding: 2rem;
+            border-bottom: 1px solid var(--light-gray);
+            transition: var(--transition);
+        }
+
+        .schedule-item:hover {
+            background-color: #f8fafc;
+        }
+
+        .schedule-time {
+            min-width: 150px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .schedule-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .schedule-content p {
+            color: var(--gray);
+        }
+
+        /* Registration */
+        .registration {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .registration h2 {
+            color: white;
+        }
+
+        .registration p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            min-width: 100px;
+            backdrop-filter: blur(10px);
+        }
+
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .section {
+                padding: 4rem 0;
+            }
+            
+            .topics {
+                grid-template-columns: 1fr;
+            }
+            
+            .schedule-item {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-brain logo-icon"></i>
+                    <span>Reliable Agentic AI: From Hallucination to Trustworthy Autonomy</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#speakers">Speakers</a></li>
+                    <li><a href="#schedule">Schedule</a></li>
+<!--                    <li><a href="#topics">Topics</a></li>-->
+                    <li><a href="#organizers">Organizers</a></li>
+<!--                    <li><a href="#registration" class="btn">Register Now</a></li>-->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Reliable Agentic AI: From Hallucination to Trustworthy Autonomy</h1>
+                <p>An interdisciplinary workshop exploring uncertainty, reliability and hallucinations in large-scale Agentic AI systems</p>
+                
+                <div class="date-venue">
+                    <div>
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>April 26th, 2026</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Rio de Janeiro, Brazil</span>
+                    </div>
+                </div>
+                
+                <div class="hero-btns">
+                    <a href="#registration" class="btn">Register Now</a>
+                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>About the Workshop</h2>
+                <p>When we delegate tasks to AI agents—can we count on them to get it right?</p>
+                <p>Agentic AI systems are increasingly moving beyond static content generation to perform autonomous decision-making tasks, such as scheduling meetings, booking travel, managing workflows, and supporting scientific research. In these settings, reliability is not merely beneficial—it is a fundamental requirement. Yet today’s foundation models remain prone to a critical failure mode: hallucination.</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Understanding Hallucinations in AI Systems</h3>
+                    <p>Foundation models have demonstrated remarkable capabilities across various domains, but they often generate outputs that are inconsistent with facts or user intent - a phenomenon known as "hallucination".</p>
+                    <p>This workshop brings together experts from machine learning, natural language processing, cognitive science, and human-computer interaction to address the challenges of uncertainty and reliability in large-scale AI systems.</p>
+                    
+                    <div class="topics">
+                        <div class="topic-card">
+                            <h4><i class="fas fa-lightbulb"></i> Key Focus Areas</h4>
+                            <p>Detection methods, uncertainty quantification, human-AI collaboration, and mitigation strategies for hallucinations</p>
+                        </div>
+                        <div class="topic-card">
+                            <h4><i class="fas fa-users"></i> Target Audience</h4>
+                            <p>Researchers, practitioners, and industry professionals working with foundation models</p>
+                        </div>
+                        <div class="topic-card">
+                            <h4><i class="fas fa-chalkboard-teacher"></i> Format</h4>
+                            <p>Keynote talks, panel discussions, paper presentations, and interactive sessions</p>
+                        </div>
+                        <div class="topic-card">
+                            <h4><i class="fas fa-trophy"></i> Outcomes</h4>
+                            <p>Shared understanding of challenges and collaborative roadmap for future research</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speakers Section -->
+    <section id="speakers" class="section speakers">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Speakers</h2>
+                <p>Topics: reliable AI agents,  uncertainty quantification and hallucination</p>
+            </div>
+            
+            <div class="speakers-grid">
+                <div class="speaker-card">
+                        <div class="speaker-img" style="background: linear-gradient(135deg, #2563eb, #8b5cf6); display: flex; align-items: center; justify-content: center;">
+                            <img src="https://dawnsong.io/dawn-berkeley.jpg" 
+             style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                        </div>
+                    <div class="speaker-info">
+                        <h3>Dawn Song</h3>
+                        <p>Professor</p>
+                        <p>University of California, Berkeley</p>
+                        <div class="speaker-links">
+                            <a href="https://dawnsong.io/" title="Website"><i class="fas fa-globe"></i></a>
+                            <a href="https://scholar.google.com/citations?user=84WzBlYAAAAJ&hl=en" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="speaker-card">
+                    <div class="speaker-img" style="background: linear-gradient(135deg, #2563eb, #8b5cf6); display: flex; align-items: center; justify-content: center;">
+                            <img src="https://www.comp.nus.edu.sg/~sochr/www/stfphotos/mohan.jpg" 
+             style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                        </div>
+                    <div class="speaker-info">
+                        <h3>Mohan Kankanhalli</h3>
+                        <p>Director of NUS AI Institute, Chair Professor</p> 
+                        <p>National University of Singapore</p>
+                        <div class="speaker-links">
+                            <a href="https://www.comp.nus.edu.sg/~mohan/" title="Website"><i class="fas fa-globe"></i></a>
+                            <a href="https://scholar.google.com/citations?user=6Lx_eowAAAAJ&hl=en" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+                        </div>
+                    </div>
+                </div>
+ 
+                
+                <div class="speaker-card">
+                    <div class="speaker-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="speaker-info">
+                        <h3>Dr. </h3>
+                        <p>TBD</p>
+                        <div class="speaker-links">
+                            <a href="" title="Website"><i class="fas fa-globe"></i></a>
+                            <a href="" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+
+                
+                <div class="speaker-card">
+                    <div class="speaker-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="speaker-info">
+                        <h3>Dr. </h3>
+                        <p>TBD</p>
+                        <div class="speaker-links">
+                            <a href="" title="Website"><i class="fas fa-globe"></i></a>
+                            <a href="" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    
+    <section id="schedule" class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Workshop Schedule</h2>
+            <p>One day of focused sessions on hallucinations in agentic systems</p>
+        </div>
+        
+        <div class="schedule-items">
+            <div class="schedule-item" style="background-color: #f8fafc;">
+                <div class="schedule-time">9:00 - 9:10 AM</div>
+                <div class="schedule-content">
+                    <h3>Opening Remarks</h3>
+                </div>
+            </div>
+            
+            <div class="schedule-item" style="background-color: #dbeafe;">
+                <div class="schedule-time">9:10 - 9:45 AM</div>
+                <div class="schedule-content">
+                    <h3>Invited Talk: Mohan Kankanhalli</h3>
+                    <p>Theme: Hallucination in agentic systems</p>
+                </div>
+            </div>
+            
+            <div class="schedule-item" style="background-color: #dcfce7;">
+                <div class="schedule-time">9:45 - 9:55 AM</div>
+                <div class="schedule-content">
+                    <h3>Discussion + Coffee Break</h3>
+                    <p>Theme: Hallucination in agentic systems</p>
+                </div>
+            </div>
+            
+            <div class="schedule-item" style="background-color: #dbeafe;">
+                <div class="schedule-time">9:55 - 10:30 AM</div>
+                <div class="schedule-content">
+                    <h3>Invited Talk: TBA</h3>
+                    <p>Theme: Hallucination in agentic systems</p>
+                </div>
+            </div>
+            
+            <div class="schedule-item" style="background-color: #dcfce7;">
+                <div class="schedule-time">10:30 - 10:40 AM</div>
+                <div class="schedule-content">
+                    <h3>Discussion + Coffee Break</h3>
+                    <p>Theme: Hallucination in agentic systems</p>
+                </div>
+            </div>
+            
+            <div class="schedule-item" style="background-color: #fef9c3;">
+                <div class="schedule-time">10:40 - 11:40 AM</div>
+                <div class="schedule-content">
+                    <h3>Poster Session I</h3>
+                    <p>Theme: Hallucination in agentic systems</p>
+                </div>
+            </div>
+            
+            <div class="schedule-item" style="background-color: #dbeafe;">
+                <div class="schedule-time">11:40 AM - 12:15 PM</div>
+                <div class="schedule-content">
+                    <h3>Invited Talk: TBA</h3>
+                </div>
+            </div>
+            
+            <div class="schedule-item">
+                <div class="schedule-time">12:15 - 1:45 PM</div>
+                <div class="schedule-content">
+                    <h3>Lunch Break</h3>
+                </div>
+            </div>
+            
+            <div class="schedule-item" style="background-color: #fef9c3;">
+                <div class="schedule-time">1:45 - 2:45 PM</div>
+                <div class="schedule-content">
+                    <h3>Poster Session II</h3>
+                    <p>Theme: Towards reliable AI agents</p>
+                </div>
+            </div>
+            
+            <div class="schedule-item" style="background-color: #dbeafe;">
+                <div class="schedule-time">2:45 - 3:20 PM</div>
+                <div class="schedule-content">
+                    <h3>Invited Talk: Dawn Song</h3>
+                    <p>Theme: Towards reliable AI agents</p>
+                </div>
+            </div>
+            
+            <div class="schedule-item" style="background-color: #dcfce7;">
+                <div class="schedule-time">3:20 - 3:30 PM</div>
+                <div class="schedule-content">
+                    <h3>Discussion + Refreshments</h3>
+                    <p>Theme: Towards reliable AI agents</p>
+                </div>
+            </div>
+            
+            <div class="schedule-item" style="background-color: #fef9c3;">
+                <div class="schedule-time">3:30 - 4:30 PM</div>
+                <div class="schedule-content">
+                    <h3>Poster Session III</h3>
+                    <p>Theme: Towards reliable AI agents</p>
+                </div>
+            </div>
+            
+            <div class="schedule-item" style="background-color: #dcfce7;">
+                <div class="schedule-time">4:30 - 4:40 PM</div>
+                <div class="schedule-content">
+                    <h3>Best Paper Award</h3>
+                </div>
+            </div>
+            
+            <div class="schedule-item" style="background-color: #fee2e2;">
+                <div class="schedule-time">4:40 - 5:40 PM</div>
+                <div class="schedule-content">
+                    <h3>Panel Discussion</h3>
+                    <p>Can we trust AI agents with critical tasks?</p>
+                </div>
+            </div>
+            
+            <div class="schedule-item">
+                <div class="schedule-time">5:40 - 5:50 PM</div>
+                <div class="schedule-content">
+                    <h3>Closing Remarks</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Registration Section -->
+    <!--
+    <section id="registration" class="section registration">
+        <div class="container">
+            <div class="section-header">
+                <h2>Register Now</h2>
+                <p>Join us in San Francisco or virtually to contribute to this important discussion</p>
+            </div>
+            
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number">27</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number">14</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number">38</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number">12</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+            
+            <a href="#" class="btn" style="background: white; color: var(--primary);">Register Now</a>
+        </div>
+    </section>-->
+    
+        <!-- Organizers Section -->
+    <section id="organizers" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Workshop Organizers</h2>
+            </div>
+            
+            <div class="speakers-grid">
+                <!-- Grigorios Chrysos -->
+                <div class="speaker-card">
+<!--                    <div class="speaker-img" style="background-image: url('https://grigoris.ece.wisc.edu/grigoris.jpeg'); background-size: cover; background-position: center;"></div>-->
+                        <div class="speaker-img" style="background: linear-gradient(135deg, #2563eb, #8b5cf6); display: flex; align-items: center; justify-content: center;">
+                            <img src="https://grigoris.ece.wisc.edu/grigoris.jpeg" 
+             style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                        </div>
+
+                    <div class="speaker-info">
+                        <h3>Grigorios Chrysos</h3>
+                        <p>Assistant Professor</p><p>University of Wisconsin-Madison</p>
+                        <div class="speaker-links">
+                            <a href="https://grigoris.ece.wisc.edu/" title="Website"><i class="fas fa-globe"></i></a>
+                            <a href="https://scholar.google.com/citations?user=1bU041kAAAAJ&hl=en" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sharon Li -->
+                <div class="speaker-card">
+<!--                    <div class="speaker-img" style="background-image: url('https://pages.cs.wisc.edu/~sharonli/images/yixuanli-2019.JPG'); background-size: cover; background-position: center;"></div>-->
+                        <div class="speaker-img" style="background: linear-gradient(135deg, #2563eb, #8b5cf6); display: flex; align-items: center; justify-content: center;">
+                            <img src="https://pages.cs.wisc.edu/~sharonli/images/yixuanli-2019.JPG" 
+             style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                        </div>
+                    <div class="speaker-info">
+                        <h3>Sharon Li</h3>
+                        <p>Assistant Professor</p><p>University of Wisconsin-Madison</p>
+                        <div class="speaker-links">
+                            <a href="https://pages.cs.wisc.edu/~sharonli/" title="Website"><i class="fas fa-globe"></i></a>
+                            <a href="https://scholar.google.com/citations?hl=en&user=QSTd1oUAAAAJ" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Etsuko Ishii -->
+                <div class="speaker-card">
+                        <div class="speaker-img" style="background: linear-gradient(135deg, #2563eb, #8b5cf6); display: flex; align-items: center; justify-content: center;">
+                            <img src="https://etsukokuste.github.io/images/profile.png" 
+             style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                        </div>
+                    <div class="speaker-info">
+                        <h3>Etsuko Ishii</h3>
+                        <p>Applied Scientist</p><p>Amazon</p>
+                        <div class="speaker-links">
+                            <a href="https://etsukokuste.github.io/" title="Website"><i class="fas fa-globe"></i></a>
+                            <a href="https://scholar.google.com/citations?user=eY9gm7QAAAAJ&hl=ja" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <!-- Sean Xuefeng Du -->
+                <div class="speaker-card">
+                        <div class="speaker-img" style="background: linear-gradient(135deg, #2563eb, #8b5cf6); display: flex; align-items: center; justify-content: center;">
+                            <img src="https://d12306.github.io/assets/image/new_shot.png" 
+             style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                        </div>
+                    <div class="speaker-info">
+                        <h3>Sean Xuefeng Du</h3>
+                        <p>Assistant Professor</p><p>Nanyang Technological University in Singapore</p>
+                        <div class="speaker-links">
+                            <a href="https://d12306.github.io/" title="Website"><i class="fas fa-globe"></i></a>
+                            <a href="https://scholar.google.com/citations?hl=en&user=GE_aEh4AAAAJ" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <!-- Katia Sycara -->
+                <div class="speaker-card">
+                    <div class="speaker-img" style="background: linear-gradient(135deg, #2563eb, #8b5cf6); display: flex; align-items: center; justify-content: center;">
+                            <img src="https://www.ri.cmu.edu/app/uploads/2016/12/Katia-Sycara-2020-3-2-crop-301x450.jpg" 
+             style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                        </div>
+                    <div class="speaker-info">
+                        <h3>Katia Sycara</h3>
+                        <p>Research Professor</p><p>Carnegie Mellon University (CMU)</p>
+                        <div class="speaker-links">
+                            <a href="https://www.ri.cmu.edu/ri-faculty/katia-sycara/" title="Website"><i class="fas fa-globe"></i></a>
+                            <a href="https://scholar.google.com/citations?user=VWv6a9kAAAAJ&hl=en" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="speaker-card">
+                        <div class="speaker-img" style="background: linear-gradient(135deg, #2563eb, #8b5cf6); display: flex; align-items: center; justify-content: center;">
+                            <img src="https://emtiyaz.github.io/emti_2021.jpg" 
+             style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                        </div>
+                    <div class="speaker-info">
+                        <h3>Emtiyaz Khan</h3>
+                        <p>Professor</p><p>RIKEN</p>
+                        <div class="speaker-links">
+                            <a href="https://emtiyaz.github.io/" title="Website"><i class="fas fa-globe"></i></a>
+                            <a href="https://scholar.google.com/citations?user=Yv6wq2kAAAAJ&hl=en" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Reliable Agentic AI: From Hallucination to Trustworthy Autonomy</h3>
+                    <p>A workshop dedicated to addressing hallucinations and uncertainty in Agentic AI systems through interdisciplinary collaboration.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="#speakers"><i class="fas fa-chevron-right"></i> Speakers</a></li>
+                        <li><a href="#schedule"><i class="fas fa-chevron-right"></i> Schedule</a></li>
+                        <li><a href="#topics"><i class="fas fa-chevron-right"></i> Topics</a></li>
+<!--                        <li><a href="#registration"><i class="fas fa-chevron-right"></i> Register</a></li>-->
+                        <li><a href="#organizers"><i class="fas fa-chevron-right"></i> Organizers</a></li>
+                    </ul>
+                </div>
+                
+                
+
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025. All rights reserved. | ICLR'26 workshop proposal</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+
