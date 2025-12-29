@@ -567,6 +567,114 @@
                 gap: 1rem;
             }
         }
+        
+        
+        /* Grigoris, added 21st December for news/submissions */
+        /* News Section Styles */
+        .news-list {
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .news-item {
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .news-date {
+            font-weight: 700;
+            color: var(--primary);
+            min-width: 120px;
+            font-family: 'Source Sans 3', sans-serif;
+        }
+
+        /* Submission Section Styles */
+        .submission-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .submission-info-grid {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-box {
+            background: #f0f9ff; /* Light blue tint matching theme */
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0 10px 10px 0;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box h4 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .important-dates {
+            background: #fefce8; /* Light yellow tint */
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #fef08a;
+            margin-bottom: 2rem;
+        }
+
+        .date-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #eab308;
+        }
+        
+        .date-row:last-child {
+            border-bottom: none;
+        }
+
+        .date-label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .date-value {
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .submission-text p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        .tag-tiny {
+            background: var(--accent);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            vertical-align: middle;
+            margin-right: 0.5rem;
+        }
     </style>
 </head>
 <body>
@@ -615,6 +723,36 @@
             </div>
         </div>
     </section>
+    
+    <section id="news" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>News & Updates</h2>
+            </div>
+            
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-date">29th Dec 2025</div>
+                    <div class="news-content">
+                        <p><strong>Call for reviewers!</strong> Are you passionate about reliable AI? We are looking for experienced reviewers on the domain to help us assess the workshop submissions. Please fill the form <a href="https://forms.gle/ejurpvCApCcnxCq3A">here</a>.</p>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-date">3rd Dec 2025</div>
+                    <div class="news-content">
+                        <p><strong>Workshop Proposal Accepted!</strong> We are excited to announce our proposal for ICLR 2026.</p>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-date">Archive</div>
+                    <div class="news-content">
+                        <p>Missed our previous workshop? Watch the recording of the <strong>ICLR 2025 Workshop</strong> here: <a href="https://iclr.cc/virtual/2025/workshop/23965" target="_blank" style="color: var(--primary); font-weight: 600;">View Recording <i class="fas fa-external-link-alt"></i></a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
 
     <!-- About Section -->
     <section id="about" class="section">
@@ -649,6 +787,62 @@
                             <p>Shared understanding of challenges and collaborative roadmap for future research</p>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="submission" class="section" style="background-color: #f8fafc;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Call for Papers</h2>
+                <p>We invite researchers to submit their latest work on reliable agentic AI</p>
+            </div>
+
+            <div class="submission-container">
+                
+                <div class="important-dates">
+                    <h3 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-calendar-check" style="color: #ca8a04;"></i> Important Dates
+                    </h3>
+                    <div class="date-row">
+                        <span class="date-label">Submission Deadline</span>
+                        <span class="date-value">30th January 2026, AOE</span>
+                    </div>
+                    <div class="date-row">
+                        <span class="date-label">Author Notification</span>
+                        <span class="date-value">26th February 2026, AOE</span>
+                    </div>
+                </div>
+
+                <div class="submission-text">
+                    <p><strong>Submission link:</strong> <a href="https://openreview.net/group?id=ICLR.cc/2026/Workshop/Reliable_Autonomy" style="color: var(--primary); text-decoration: underline;">https://openreview.net/group?id=ICLR.cc/2026/Workshop/Reliable_Autonomy</a></p>
+                    <p><strong>Submission format:</strong> ICLR template. <strong>6-8 pages</strong> for regular submissions, <strong>2-4 pages</strong> for tiny papers.</p>
+                    
+                    <hr style="margin: 2rem 0; border: 0; border-top: 1px solid var(--light-gray);">
+
+                    <h4>Policy on Tiny Papers</h4>
+                    <p>This year, ICLR is requiring each workshop to accept short (2-4 pages in ICLR format) paper submissions, with an eye towards inclusion.</p>
+                    
+                    <p>Authors of these papers will be earmarked for potential funding from the main conference of ICLR, but need to submit a separate application for Financial Assistance that evaluates their eligibility. This application for Financial Assistance to attend ICLR 2026 will become available on the ICLR website, which is centrally managed by ICLR and not the workshop organizers.</p>
+
+                    <div class="highlight-box">
+                        <h4><span class="tag-tiny">TINY</span> Tiny Paper Track Instructions</h4>
+                        <p>For submissions to the Tiny Paper Track, the <strong>Appendix will not be reviewed</strong>. The submission must be limited to 2-4 pages of content.</p>
+                        <p style="margin-bottom: 0;"><strong>Requirement:</strong> Include the label <strong>"TINY"</strong> at the start of the title to distinguish it from regular submissions. If this label is not included, the submission will be treated as a regular one.</p>
+                    </div>
+                    
+                    <p style="font-style: italic; color: var(--dark); border-top: 1px solid var(--light-gray); padding-top: 1rem; margin-top: 1rem;">
+                        <i class="fas fa-info-circle"></i> <strong>Note:</strong> Please note that we follow ICLR's reciprocal reviewing policy for authors. We are committed to keeping this burden low, limiting assignments to at most 3 papers.
+                    </p>
+
+                    <p style="font-style: italic; color: var(--dark); border-top: 1px solid var(--light-gray); padding-top: 1rem; margin-top: 1rem;">
+                        <i class="fas fa-info-circle"></i> <strong>Note:</strong> This workshop is <strong>non-archival</strong>. The workshop provides a platform for researchers to present and discuss their latest findings without the pressure of formal publication.
+                    </p>
+                    
+                    <p style="font-style: italic; color: var(--dark); border-top: 1px solid var(--light-gray); padding-top: 1rem; margin-top: 1rem;">
+                        <i class="fas fa-info-circle"></i> <strong>Note:</strong> All authors are required to have an updated OpenReview profile. Please register with an institutional email, otherwise it might require up to two weeks for your account to be registered. 
+                    </p>
                 </div>
             </div>
         </div>
@@ -705,7 +899,7 @@
 
                 <div class="speaker-card">
                     <div class="speaker-img" style="background: linear-gradient(135deg, #2563eb, #8b5cf6); display: flex; align-items: center; justify-content: center;">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Stefano_Soatto.jpg/440px-Stefano_Soatto.jpg" 
+                        <img src="https://web.cs.ucla.edu/~soatto/soattopics/Stefano_Soatto_2008.jpg" 
                              alt="Stefano Soatto"
                              style="max-height: 100%; max-width: 100%; object-fit: cover;">
                     </div>
@@ -1144,7 +1338,7 @@
                         <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
                         <li><a href="#speakers"><i class="fas fa-chevron-right"></i> Speakers</a></li>
                         <li><a href="#schedule"><i class="fas fa-chevron-right"></i> Schedule</a></li>
-                        <li><a href="#topics"><i class="fas fa-chevron-right"></i> Topics</a></li>
+<!--                        <li><a href="#topics"><i class="fas fa-chevron-right"></i> Topics</a></li>-->
 <!--                        <li><a href="#registration"><i class="fas fa-chevron-right"></i> Register</a></li>-->
                         <li><a href="#organizers"><i class="fas fa-chevron-right"></i> Organizers</a></li>
                     </ul>
